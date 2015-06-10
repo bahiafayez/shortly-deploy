@@ -3,6 +3,9 @@
 .LSOverride
 azure.err
 iisnode.yml
+public/dist
+node_modules
+db/shortly.sqlite
 
 # Icon must ends with two \r.
 Icon
