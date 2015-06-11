@@ -10,8 +10,9 @@ var UsersSchema = mongoose.Schema({
 UsersSchema.plugin(timestamps);
 
 UsersSchema.methods.comparePassword = function(attemptedPassword, callback) {
-  bcrypt.compare(attemptedPassword, this.password, function(err, isMatch) {
-    callback(isMatch);
+  var compare = Promise.promisify(bcrypt.compare);
+  compare(attemptedPassword, this.password).then(function(isMatch) {
+     callback(null, isMatch);
   });
 };
 
@@ -21,7 +22,7 @@ UsersSchema.methods.hashPassword =  function(){
       .then(function(hash) {
         this.password = hash;
       });
-  }
+};
 
 UsersSchema.pre('save', function(next, done) {
   this.hashPassword();
