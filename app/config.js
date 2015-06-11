@@ -9,5 +9,4 @@ db.once('open', function (callback) {
   console.log('OPEN DATABASE');
 });
 
-
 module.exports = mongoose;
